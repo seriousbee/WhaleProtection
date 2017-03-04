@@ -53,6 +53,9 @@ public class RVadapter extends RecyclerView.Adapter<RVadapter.MyViewHolder> {
         holder.messageText.setText(currentMessage.getText());
         if(position!=0 && messages.get(position-1).getId() == messages.get(position).getId()){
             holder.imageView.setVisibility(View.INVISIBLE);
+        } else {
+            holder.imageView.setVisibility(View.VISIBLE);
+
         }
     }
 
