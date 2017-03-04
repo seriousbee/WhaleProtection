@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_chat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ulluna.whaleprotection.ChatActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/chatBar"
+        android:id="@+id/toolbarChat"
+        android:elevation="4dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarChat">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerViewChat"
+            android:padding="24dp"/>
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:id="@+id/linearLayout1"
+        android:background="#EEEEEE">
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:onClick="sendMessage"
+            android:background="@drawable/ic_send_black_24dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/sendButton"
+            android:layout_margin="8dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextMessage"
+            android:layout_toLeftOf="@id/sendButton"
+            android:hint="Type here a message..."
+            android:layout_margin="8dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+    </FrameLayout>
+</RelativeLayout>

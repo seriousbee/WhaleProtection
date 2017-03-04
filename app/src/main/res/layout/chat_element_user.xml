@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/holderLL"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="I want my faucet fixed. By tomorrow."
+        android:textColor="#ffffff"
+        android:id="@+id/message"
+        android:textAlignment="textEnd"
+        android:gravity="center_vertical"
+        android:layout_weight="6"
+        android:background="@drawable/chat_sent"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/user"
+        android:id="@+id/imageView"
+        android:layout_marginLeft="8dp"/>
+
+</LinearLayout>
