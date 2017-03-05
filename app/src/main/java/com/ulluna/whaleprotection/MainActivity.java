@@ -19,7 +19,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -69,16 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void submit(View view) {
+        TextView textView = (TextView)findViewById(R.id.messageEditText);
+        String s = textView.getText().toString();
+
         final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
         Intent i = this.getPackageManager().getLaunchIntentForPackage("com.facebook.katana");
         this.startActivity(i);
-        exec.schedule(new Runnable(){
-            @Override
-            public void run(){
-                makeNotification();
-            }
-        }, 1, TimeUnit.SECONDS);
-        //System.exit(0);
+
+        if(s.toLowerCase().contains("sad") || s.toLowerCase().contains("depres") || s.toLowerCase().contains("death") ||s.toLowerCase().contains("worthless")) {
+            exec.schedule(new Runnable() {
+                @Override
+                public void run() {
+                    makeNotification();
+                }
+            }, 2, TimeUnit.SECONDS);
+        } else {
+            System.exit(0);
+        }
     }
 
     public void makeNotification(){

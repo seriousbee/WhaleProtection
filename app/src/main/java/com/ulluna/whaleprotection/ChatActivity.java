@@ -3,8 +3,11 @@ package com.ulluna.whaleprotection;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -64,7 +69,11 @@ public class ChatActivity extends AppCompatActivity implements DownloadFileCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if(Build.VERSION.SDK_INT>=21)
+            window.setStatusBarColor(this.getResources().getColor(R.color.chatBar));
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
@@ -129,7 +138,7 @@ public class ChatActivity extends AppCompatActivity implements DownloadFileCallb
             longitude = gps.getLongitude();
 
             // \n is for new line
-            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         } else {
             // Can't get location.
             // GPS or network is not enabled.
@@ -160,16 +169,18 @@ public class ChatActivity extends AppCompatActivity implements DownloadFileCallb
 
     @Override
     public void confirmFinish(JSONArray array) {
-        int length = array.length();
-        ArrayList<Message> messages = new ArrayList<>();
-        for (int i = 0; i < array.length(); i++) {
-            try {
-                messages.add(new Message((JSONArray) array.get(i)));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if(array!=null) {
+            int length = array.length();
+            ArrayList<Message> messages = new ArrayList<>();
+            for (int i = 0; i < array.length(); i++) {
+                try {
+                    messages.add(new Message((JSONArray) array.get(i)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+            adapter.updateData(messages);
         }
-        adapter.updateData(messages);
     }
 
     public void sendMessage(String s){

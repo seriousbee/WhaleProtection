@@ -35,7 +35,6 @@ public class DownloadUtil extends AsyncTask<String, String, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        Toast.makeText(context, "Downloaded!", Toast.LENGTH_LONG).show();
         callback.confirmFinish(array);
     }
 
@@ -58,6 +57,8 @@ public class DownloadUtil extends AsyncTask<String, String, Void> {
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("com.ulluna.demergency", "Problem with download");
+            Toast.makeText(context, "Download failed!", Toast.LENGTH_LONG).show();
+
         }
     }
 }
